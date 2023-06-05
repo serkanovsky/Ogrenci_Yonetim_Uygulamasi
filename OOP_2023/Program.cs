@@ -10,11 +10,46 @@ namespace Ogrenci_Yonetim_Uygulamasi
         static void Main(string[] args)
         {
             SahteVeriGir();
+
+            Menu();
+            while (true)
+            {
+                Console.WriteLine("Seciminiz: ");
+                string secim = Console.ReadLine();
+                switch (secim)
+                {
+                    case "1":
+                    case "E":
+                        OgrenciEkle();
+                        break;
+                    case "L":
+                    case "2":
+                        OgrenciListele();
+                        break;
+                    case "S":
+                    case "3":
+                        OgrenciSil();
+                        break;
+                        //case "4":
+                        //case "X":
+
+                        //    break;
+
+                }
+            }
             OgrenciListele();
             Console.WriteLine();
             OgrenciSil();
             OgrenciEkle();
 
+        }
+        static void Menu()
+        {
+            Console.WriteLine("Ogrenci Yonetim Uygulamasi");
+            Console.WriteLine("1- Ogrenci Ekle(E)        ");
+            Console.WriteLine("2- Ogrenci Listele(L)");
+            Console.WriteLine("3- Ogrenci Sil(S)");
+            Console.WriteLine("4- Cikis(C)");
         }
         static void OgrenciEkle()
         {
@@ -63,26 +98,31 @@ namespace Ogrenci_Yonetim_Uygulamasi
             Console.WriteLine("No: ");
             int no = int.Parse(Console.ReadLine());
 
+            Ogrenci ogr = null;
             foreach (Ogrenci x in Ogrenciler)
             {
-                if (x.No==no)
+                if (x.No == no)
                 {
-                    Console.WriteLine("Adi: "+x.Ad);
-                    Console.WriteLine("Soyadi: "+x.Soyad); 
-                    Console.WriteLine("Subesi: "+x.Sube);
+                    ogr = x;
+                    break;
+                }
+            }
+            if (ogr != null)
+            {
+                Console.WriteLine("Adi: " + ogr.Ad);
+                Console.WriteLine("Soyadi: " + ogr.Soyad);
+                Console.WriteLine("Subesi: " + ogr.Sube);
 
-                    Console.WriteLine("Ogrenciyi silmek istediginize emin misiniz? (E/H)");
-                    string secim = Console.ReadLine().ToLower();
-                    if (secim == "e")
-                    {
-                        Ogrenciler.Remove(x);
-                        Console.WriteLine("Ogrenci Silindi");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Ogrenci silinmedi.");
-                    }
-
+                Console.WriteLine("Ogrenciyi silmek istediginize emin misiniz? (E/H)");
+                string secim = Console.ReadLine().ToLower();
+                if (secim == "e")
+                {
+                    Ogrenciler.Remove(ogr);
+                    Console.WriteLine("Ogrenci Silindi");
+                }
+                else
+                {
+                    Console.WriteLine("Ogrenci silinmedi.");
                 }
             }
         }
